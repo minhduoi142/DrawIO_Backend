@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+#  postgres:
+#    image: postgres
+#    container_name: postgres
+#    ports:
+#      - "5432:5432"
+#    environment:
+#      POSTGRES_DB: NewD
+#      POSTGRES_USER: Minh
+#      POSTGRES_PASSWORD: 1234
+#    networks:
+#      - springboot-network
+ # redis:
+ #   image: redis:latest
+ #   container_name: redis
+ #   ports:
+ #     - "6379:6379"
+ #   volumes:
+ #     - redis_data:/data
+ #   restart: unless-stopped
+ #   networks:
+ #     - springboot-network
+ app:
+   build: ..
+   ports:
+     - "8080:8080"
+   # depends_on:
+##      - postgres
+     # - redis
+   networks:
+     - springboot-network
+   environment:
+     - SPRING_PROFILES_ACTIVE=docker
+   container_name: spring-boot
+
+networks:
+ springboot-network:
+
+volumes:
+ redis_data:
